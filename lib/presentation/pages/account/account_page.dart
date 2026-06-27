@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/services/biometric_service.dart';
+import '../../../core/services/notification_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../data/datasources/local/secure_storage_datasource.dart';
 import '../../../injection/injection_container.dart';
@@ -307,26 +308,20 @@ class _BiometricSettingRowState extends State<BiometricSettingRow> {
       if (authenticated) {
         await sl<SecureStorageDatasource>().saveBiometricEnabled(true);
         setState(() => _isEnabled = true);
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Login biometrik diaktifkan'),
-              backgroundColor: AppColors.green,
-            ),
-          );
-        }
+        await sl<NotificationService>().showNotification(
+          id: 101,
+          title: 'Keamanan Wallet Ku',
+          body: 'Login biometrik (sidik jari/Face ID) berhasil diaktifkan.',
+        );
       }
     } else {
       await sl<SecureStorageDatasource>().saveBiometricEnabled(false);
       setState(() => _isEnabled = false);
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Login biometrik dinonaktifkan'),
-            backgroundColor: AppColors.slate600,
-          ),
-        );
-      }
+      await sl<NotificationService>().showNotification(
+        id: 101,
+        title: 'Keamanan Wallet Ku',
+        body: 'Login biometrik (sidik jari/Face ID) dinonaktifkan.',
+      );
     }
   }
 

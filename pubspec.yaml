@@ -54,6 +54,9 @@ dependencies:
   # Biometric Auth
   local_auth: ^2.3.0
 
+  # Local Notifications
+  flutter_local_notifications: ^17.2.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
