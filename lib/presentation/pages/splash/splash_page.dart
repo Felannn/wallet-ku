@@ -130,24 +130,35 @@ class _SplashPageState extends State<SplashPage> {
                       ),
                       const SizedBox(height: 16),
                       if (_needsBiometricUnlock) ...[
-                        const Icon(
-                          Icons.fingerprint_rounded,
-                          size: 72,
-                          color: Colors.white,
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          _authenticating
-                              ? 'Memverifikasi sidik jari...'
-                              : 'Aplikasi Terkunci\nSilakan gunakan sidik jari untuk masuk.',
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontFamily: 'PlusJakartaSans',
-                            fontSize: 15,
-                            color: Colors.white,
-                            height: 1.5,
+                        if (_authenticating) ...[
+                          const Text(
+                            'Menghubungkan secara aman...',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: 'PlusJakartaSans',
+                              fontSize: 15,
+                              color: Colors.white70,
+                              height: 1.5,
+                            ),
                           ),
-                        ),
+                        ] else ...[
+                          const Icon(
+                            Icons.lock_outline_rounded,
+                            size: 64,
+                            color: Colors.white,
+                          ),
+                          const SizedBox(height: 12),
+                          const Text(
+                            'Aplikasi Terkunci\nSilakan verifikasi biometrik untuk masuk.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: 'PlusJakartaSans',
+                              fontSize: 15,
+                              color: Colors.white,
+                              height: 1.5,
+                            ),
+                          ),
+                        ],
                       ] else ...[
                         const Text(
                           'Bayar, transfer, dan kelola uang\ndalam satu aplikasi yang aman.',
@@ -183,12 +194,14 @@ class _SplashPageState extends State<SplashPage> {
                             ),
                           ),
                         ] else ...[
-                          const SizedBox(
-                            width: 24,
-                            height: 24,
-                            child: CircularProgressIndicator(
-                              color: Colors.white,
-                              strokeWidth: 2.5,
+                          const Center(
+                            child: SizedBox(
+                              width: 32,
+                              height: 32,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 3,
+                              ),
                             ),
                           ),
                         ],
