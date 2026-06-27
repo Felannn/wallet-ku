@@ -1,7 +1,8 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationService {
-  final FlutterLocalNotificationsPlugin _notificationsPlugin = FlutterLocalNotificationsPlugin();
+  final FlutterLocalNotificationsPlugin _notificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
   /// Initialize local notification settings for Android and iOS
   Future<void> init() async {
@@ -15,7 +16,8 @@ class NotificationService {
       requestSoundPermission: false,
     );
 
-    const InitializationSettings initializationSettings = InitializationSettings(
+    const InitializationSettings initializationSettings =
+        InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsDarwin,
     );
@@ -27,15 +29,18 @@ class NotificationService {
 
   /// Request local notification permissions from the user
   Future<bool> requestPermissions() async {
-    final androidImplementation = _notificationsPlugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>();
+    final androidImplementation =
+        _notificationsPlugin.resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>();
     bool? grantedAndroid = false;
     if (androidImplementation != null) {
-      grantedAndroid = await androidImplementation.requestNotificationsPermission();
+      grantedAndroid =
+          await androidImplementation.requestNotificationsPermission();
     }
 
-    final iosImplementation = _notificationsPlugin
-        .resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>();
+    final iosImplementation =
+        _notificationsPlugin.resolvePlatformSpecificImplementation<
+            IOSFlutterLocalNotificationsPlugin>();
     bool? grantedIOS = false;
     if (iosImplementation != null) {
       grantedIOS = await iosImplementation.requestPermissions(
@@ -63,7 +68,8 @@ class NotificationService {
       priority: Priority.high,
     );
 
-    const DarwinNotificationDetails iosNotificationDetails = DarwinNotificationDetails(
+    const DarwinNotificationDetails iosNotificationDetails =
+        DarwinNotificationDetails(
       presentAlert: true,
       presentBadge: true,
       presentSound: true,
