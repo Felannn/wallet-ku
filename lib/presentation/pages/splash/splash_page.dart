@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/services/biometric_service.dart';
 import '../../../core/services/deeplink_service.dart';
+import '../../../core/services/notification_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../data/datasources/local/secure_storage_datasource.dart';
 import '../../../injection/injection_container.dart';
@@ -24,6 +25,9 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      sl<NotificationService>().requestPermissions();
+    });
     context.read<AuthBloc>().add(AuthCheckRequested());
   }
 

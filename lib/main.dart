@@ -26,7 +26,6 @@ void main() async {
 
   // Initialize notifications
   await di.sl<NotificationService>().init();
-  await di.sl<NotificationService>().requestPermissions();
 
   // Set preferred orientations
   await SystemChrome.setPreferredOrientations([
