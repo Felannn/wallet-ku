@@ -14,39 +14,10 @@
       },
       "oauth_client": [
         {
-          "client_id": "1008109411240-7eqq02nc97iove5p5oo6v07eklo4g0lq.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCvdJMCkaNzggIffHwd2lRRuQMk9vxxppw"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1008109411240-7eqq02nc97iove5p5oo6v07eklo4g0lq.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1008109411240:android:55c3c69c47d4c7f4651b9d",
-        "android_client_info": {
-          "package_name": "com.walletku.app"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1008109411240-prbq1q2954813d5q79rjql8d93a7sgkq.apps.googleusercontent.com",
+          "client_id": "1008109411240-0h6o9e12k6n96f0akptuve1i60f5j2dd.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.walletku.app",
+            "package_name": "com.example.wallet_ku",
             "certificate_hash": "662c3663588851ddbe4ec4d33ce4bee09e659c6d"
           }
         },
