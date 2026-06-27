@@ -1,6 +1,6 @@
 {
-    "name": "wallet_ku",
-    "short_name": "wallet_ku",
+    "name": "Wallet Ku",
+    "short_name": "Wallet Ku",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
