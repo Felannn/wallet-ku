@@ -6,7 +6,7 @@ class NotificationService {
   /// Initialize local notification settings for Android and iOS
   Future<void> init() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('launcher_icon');
+        AndroidInitializationSettings('@mipmap/launcher_icon');
 
     const DarwinInitializationSettings initializationSettingsDarwin =
         DarwinInitializationSettings(
@@ -29,7 +29,6 @@ class NotificationService {
   Future<bool> requestPermissions() async {
     final androidImplementation = _notificationsPlugin
         .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>();
-    
     bool? grantedAndroid = false;
     if (androidImplementation != null) {
       grantedAndroid = await androidImplementation.requestNotificationsPermission();
@@ -37,7 +36,6 @@ class NotificationService {
 
     final iosImplementation = _notificationsPlugin
         .resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>();
-    
     bool? grantedIOS = false;
     if (iosImplementation != null) {
       grantedIOS = await iosImplementation.requestPermissions(
