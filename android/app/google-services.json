@@ -7,6 +7,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1008109411240:android:e04e8111670f3ddc651b9d",
+        "android_client_info": {
+          "package_name": "com.example.wallet_ku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1008109411240-7eqq02nc97iove5p5oo6v07eklo4g0lq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvdJMCkaNzggIffHwd2lRRuQMk9vxxppw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1008109411240-7eqq02nc97iove5p5oo6v07eklo4g0lq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1008109411240:android:55c3c69c47d4c7f4651b9d",
         "android_client_info": {
           "package_name": "com.walletku.app"

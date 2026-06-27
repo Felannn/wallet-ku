@@ -1,0 +1,1 @@
+{"flutter":{"platforms":{"android":{"default":{"projectId":"e-wallet-ku","appId":"1:1008109411240:android:e04e8111670f3ddc651b9d","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"e-wallet-ku","configurations":{"android":"1:1008109411240:android:e04e8111670f3ddc651b9d","web":"1:1008109411240:web:b5826c4bd3268a9f651b9d"}}}}}}
