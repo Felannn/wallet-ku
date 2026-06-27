@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/services/deeplink_callback_service.dart';
+import '../../../core/services/notification_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/currency_formatter.dart';
 import '../../../data/datasources/local/secure_storage_datasource.dart';
@@ -182,6 +183,11 @@ class _PinPageState extends State<PinPage> {
                 ],
               });
             } else if (state is PaymentTopupSuccess) {
+              sl<NotificationService>().showNotification(
+                id: 201,
+                title: 'Top Up Berhasil',
+                body: 'Saldo sebesar ${CurrencyFormatter.format(state.amount)} berhasil ditambahkan.',
+              );
               context.go('/success', extra: {
                 'title': 'Top up berhasil',
                 'subtitle': 'Saldo kamu bertambah',
