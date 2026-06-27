@@ -51,6 +51,9 @@ dependencies:
   # Url Launcher
   url_launcher: ^6.3.1
 
+  # Biometric Auth
+  local_auth: ^2.3.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/services/biometric_service.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../data/datasources/local/secure_storage_datasource.dart';
+import '../../../injection/injection_container.dart';
 import '../../blocs/auth/auth_bloc.dart';
 import '../../widgets/app_avatar.dart';
 import '../../widgets/app_badge.dart';
@@ -127,14 +130,7 @@ class AccountPage extends StatelessWidget {
                               onTap: () {},
                             ),
                             const Divider(height: 1, indent: 56, color: AppColors.line2),
-                            _Row(
-                              icon: Icons.fingerprint_rounded,
-                              tone: 'violet',
-                              title: 'Login biometrik',
-                              subtitle: 'Sidik jari',
-                              onTap: () {},
-                              right: _Toggle(),
-                            ),
+                            const BiometricSettingRow(),
                           ],
                         ),
                       ),
@@ -273,28 +269,131 @@ class _Row extends StatelessWidget {
   }
 }
 
-class _Toggle extends StatefulWidget {
+class BiometricSettingRow extends StatefulWidget {
+  const BiometricSettingRow({super.key});
+
   @override
-  State<_Toggle> createState() => _ToggleState();
+  State<BiometricSettingRow> createState() => _BiometricSettingRowState();
 }
 
-class _ToggleState extends State<_Toggle> {
-  bool _on = true;
+class _BiometricSettingRowState extends State<BiometricSettingRow> {
+  bool _isEnabled = false;
+  bool _isSupported = false;
+  bool _loading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSettings();
+  }
+
+  Future<void> _loadSettings() async {
+    final supported = await sl<BiometricService>().isBiometricAvailable();
+    final enabled = await sl<SecureStorageDatasource>().getBiometricEnabled();
+    if (mounted) {
+      setState(() {
+        _isSupported = supported;
+        _isEnabled = enabled;
+        _loading = false;
+      });
+    }
+  }
+
+  Future<void> _toggleBiometric(bool value) async {
+    if (value) {
+      final authenticated = await sl<BiometricService>().authenticate(
+        reason: 'Verifikasi biometrik Anda untuk mengaktifkan fitur ini',
+      );
+      if (authenticated) {
+        await sl<SecureStorageDatasource>().saveBiometricEnabled(true);
+        setState(() => _isEnabled = true);
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Login biometrik diaktifkan'),
+              backgroundColor: AppColors.green,
+            ),
+          );
+        }
+      }
+    } else {
+      await sl<SecureStorageDatasource>().saveBiometricEnabled(false);
+      setState(() => _isEnabled = false);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Login biometrik dinonaktifkan'),
+            backgroundColor: AppColors.slate600,
+          ),
+        );
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_loading) {
+      return const SizedBox(
+        height: 56,
+        child: Center(
+          child: SizedBox(
+            width: 20,
+            height: 20,
+            child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.primary),
+          ),
+        ),
+      );
+    }
+
+    if (!_isSupported) {
+      return _Row(
+        icon: Icons.fingerprint_rounded,
+        tone: 'violet',
+        title: 'Login biometrik',
+        subtitle: 'Tidak didukung di perangkat ini',
+        onTap: () {},
+        right: const Icon(Icons.info_outline, size: 18, color: AppColors.slate400),
+      );
+    }
+
+    return _Row(
+      icon: Icons.fingerprint_rounded,
+      tone: 'violet',
+      title: 'Login biometrik',
+      subtitle: _isEnabled ? 'Aktif · Sidik jari / Face ID' : 'Nonaktif · Sentuh untuk aktifkan',
+      onTap: () => _toggleBiometric(!_isEnabled),
+      right: _Toggle(
+        value: _isEnabled,
+        onChanged: _toggleBiometric,
+      ),
+    );
+  }
+}
+
+class _Toggle extends StatelessWidget {
+  final bool value;
+  final ValueChanged<bool> onChanged;
+
+  const _Toggle({
+    required this.value,
+    required this.onChanged,
+  });
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => setState(() => _on = !_on),
+      onTap: () => onChanged(!value),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 180),
         width: 44,
         height: 26,
         decoration: BoxDecoration(
-          color: _on ? AppColors.green : AppColors.line,
+          color: value ? AppColors.green : AppColors.line,
           borderRadius: BorderRadius.circular(20),
         ),
         child: AnimatedAlign(
           duration: const Duration(milliseconds: 180),
-          alignment: _on ? Alignment.centerRight : Alignment.centerLeft,
+          alignment: value ? Alignment.centerRight : Alignment.centerLeft,
           child: Container(
             margin: const EdgeInsets.all(3),
             width: 20,
