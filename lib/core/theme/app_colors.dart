@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  // Primary Blue Gradient
-  static const Color primary = Color(0xFF1A73E8);
-  static const Color primaryLight = Color(0xFF4D9FFF);
-  static const Color primaryDark = Color(0xFF0052CC);
-  static const Color primaryDeep = Color(0xFF003380);
-  static const Color primarySurface = Color(0xFFE8F1FD);
-  static const Color primaryBorder = Color(0xFFB8D0F7);
+  // Primary Indigo-Purple Gradient (Premium Theme)
+  static const Color primary = Color(0xFF4F46E5);
+  static const Color primaryLight = Color(0xFF818CF8);
+  static const Color primaryDark = Color(0xFF3730A3);
+  static const Color primaryDeep = Color(0xFF1E1B4B);
+  static const Color primarySurface = Color(0xFFEEF2FF);
+  static const Color primaryBorder = Color(0xFFC7D2FE);
 
   // Semantic
   static const Color green = Color(0xFF16A571);
@@ -42,7 +42,7 @@ class AppColors {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     stops: [0.0, 0.5, 1.0],
-    colors: [Color(0xFF4D9FFF), Color(0xFF1A73E8), Color(0xFF003380)],
+    colors: [primaryLight, primary, primaryDeep],
   );
 
   // Shadows
