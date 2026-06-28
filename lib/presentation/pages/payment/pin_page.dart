@@ -252,14 +252,20 @@ class _PinPageState extends State<PinPage> {
         ),
       ],
       child: Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: IconButton(
-                  icon: const Icon(Icons.close_rounded, color: AppColors.ink),
+        backgroundColor: AppColors.bg,
+        body: Column(
+          children: [
+            // Gradient Header
+            Container(
+              decoration: const BoxDecoration(
+                gradient: AppColors.headerGradient,
+              ),
+              child: SafeArea(
+                bottom: false,
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.close_rounded, color: Colors.white),
                   onPressed: () {
                     if (_step == _Step.otp && !_busy) {
                       _countdown?.cancel();
@@ -281,31 +287,44 @@ class _PinPageState extends State<PinPage> {
                     }
                   },
                 ),
-              ),
-              if (_busy) ...[
                 const Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircularProgressIndicator(color: AppColors.primary),
-                      SizedBox(height: 18),
-                      Text('Memproses transaksi…',
-                          style: TextStyle(
-                            fontFamily: 'PlusJakartaSans',
-                            fontSize: 15,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.slate600,
-                          )),
-                    ],
+                  child: Text(
+                    'Masukkan PIN',
+                    style: TextStyle(
+                      fontFamily: 'PlusJakartaSans',
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 17,
+                    ),
                   ),
                 ),
-              ] else if (_step == _Step.pin) ...[
-                Expanded(child: _buildPinStep()),
-              ] else ...[
-                Expanded(child: _buildOtpStep()),
               ],
-            ],
+            ),
           ),
+            ),
+            if (_busy) ...[
+              const Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(color: AppColors.primary),
+                    SizedBox(height: 18),
+                    Text('Memproses transaksi…',
+                        style: TextStyle(
+                          fontFamily: 'PlusJakartaSans',
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.slate600,
+                        )),
+                  ],
+                ),
+              ),
+            ] else if (_step == _Step.pin) ...[
+              Expanded(child: _buildPinStep()),
+            ] else ...[
+              Expanded(child: _buildOtpStep()),
+            ],
+          ],
         ),
       ),
     );

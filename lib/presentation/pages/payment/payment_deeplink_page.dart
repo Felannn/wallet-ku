@@ -53,7 +53,7 @@ class PaymentDeeplinkPage extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            color: AppColors.primary,
+            decoration: const BoxDecoration(gradient: AppColors.headerGradient),
             padding: EdgeInsets.fromLTRB(16, MediaQuery.of(context).padding.top + 6, 16, 14),
             child: Row(
               children: [
