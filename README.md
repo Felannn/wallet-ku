@@ -225,3 +225,63 @@ Integrasi komunikasi antar-aplikasi (**Material Ku** ⇆ **Wallet Ku**) berjalan
 * Listener stream di `main.dart` mengurai parameter kembalian:
   * **Jika `status == success`**: Toko Material memanggil API callback backend untuk mengubah status pesanan di database menjadi `"Selesai"`, menampilkan **`PaymentSuccessPage`**, dan mengirimkan **Push Notification** suara sukses.
   * **Jika `status == cancelled`**: Toko Material membatalkan proses, membiarkan status pesanan tetap `"Menunggu Pembayaran"` agar bisa dibayar ulang lewat menu **History**, dan memicu **Silent Background Notification** yang masuk langsung ke Notification Drawer.
+
+
+### Tampilan UI Aplikasi Material ku & Wallet ku
+
+* Tampilan Aplikasi Wallet Ku :
+<p align="center">
+  <img src="assets/images/wallet1.jpeg" width="200"/>
+  <img src="assets/images/wallet2.jpeg" width="200"/>
+  <img src="assets/images/wallet3.jpeg" width="200"/>
+  <img src="assets/images/wallet4.jpeg" width="200"/>
+  <img src="assets/images/wallet5.jpeg" width="200"/>
+  <img src="assets/images/wallet6.jpeg" width="200"/>
+  <img src="assets/images/wallet7.jpeg" width="200"/>
+  <img src="assets/images/wallet8.jpeg" width="200"/>
+  <img src="assets/images/wallet9.jpeg" width="200"/>
+  <img src="assets/images/wallet10.jpeg" width="200"/>
+  <img src="assets/images/wallet11.jpeg" width="200"/>
+  <img src="assets/images/wallet12.jpeg" width="200"/>
+  <img src="assets/images/wallet13.jpeg" width="200"/>
+</p>
+
+* Tampilan Aplikasi Toko Material Ku:
+<p align="center">
+  <img src="assets/images/material1.jpeg" width="200"/>
+  <img src="assets/images/material2.jpeg" width="200"/>
+  <img src="assets/images/material3.jpeg" width="200"/>
+  <img src="assets/images/material4.jpeg" width="200"/>
+  <img src="assets/images/material5.jpeg" width="200"/>
+  <img src="assets/images/material6.jpeg" width="200"/>
+  <img src="assets/images/material7.jpeg" width="200"/>
+  <img src="assets/images/material8.jpeg" width="200"/>
+  <img src="assets/images/material9.jpeg" width="200"/>
+  <img src="assets/images/material10.jpeg" width="200"/>
+</p>
+
+* Tampilan Ketika Aplikasi saling terhubung dengan deeplink
+
+<p align="center">
+  <img src="assets/images/deeplink1.jpeg" width="200"/>
+  <img src="assets/images/deeplink2.jpeg" width="200"/>
+  <img src="assets/images/deeplink3.jpeg" width="200"/>
+  <img src="assets/images/deeplink4.jpeg" width="200"/>
+  <img src="assets/images/deeplink5.jpeg" width="200"/>
+  <img src="assets/images/deeplink6.jpeg" width="200"/>
+  <img src="assets/images/deeplink7.jpeg" width="200"/>
+</p>
+
+### Github Repository
+
+* [E-commerce Material Ku](https://github.com/Felannn/matrial_1123150086_uts.git) - Klik untuk melihat repositori E-Commerce
+
+* [Wallet Ku](https://github.com/Felannn/wallet-ku.git) - Klik untuk melihat repositori E-Money Wallet
+
+* [Backend E-Commerce](https://github.com/Felannn/gin-backend.git) - Klik untuk melihat repositori Backend Api E-commerce
+
+* [Backend E-Money](https://github.com/Felannn/be-wallet-ku.git) - Klik untuk melihat repositori Backend Api E-Money
+
+### Presentasi Youtube
+
+* [Link Presentasi Youtube](https://youtu.com) - Klik untuk melihat presentasi Youtube
