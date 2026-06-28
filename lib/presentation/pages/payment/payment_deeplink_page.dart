@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/router/app_router.dart';
 import '../../../core/services/deeplink_callback_service.dart';
 import '../../../core/services/deeplink_service.dart';
 import '../../../core/theme/app_colors.dart';
@@ -19,8 +20,7 @@ class PaymentDeeplinkPage extends StatelessWidget {
   final Object? data;
   const PaymentDeeplinkPage({super.key, this.data});
 
-  void _cancel(BuildContext context, DeeplinkPaymentData payload) {
-    // Kirim callback cancelled ke app merchant sebelum kembali ke home.
+  void _sendCancelCallback(DeeplinkPaymentData payload) {
     final cb = payload.callbackUrl;
     if (cb != null && cb.isNotEmpty) {
       DeeplinkCallbackService.notifyCancelled(
@@ -28,7 +28,6 @@ class PaymentDeeplinkPage extends StatelessWidget {
         reference: payload.reference,
       );
     }
-    context.go('/home');
   }
 
   @override
@@ -43,10 +42,11 @@ class PaymentDeeplinkPage extends StatelessWidget {
     }
 
     return PopScope(
-      // Cegah pop default; tangani sendiri agar callback terkirim.
-      canPop: false,
+      canPop: true,
       onPopInvokedWithResult: (didPop, _) {
-        if (!didPop) _cancel(context, payload);
+        if (didPop) {
+          _sendCancelCallback(payload);
+        }
       },
       child: Scaffold(
       backgroundColor: AppColors.bg,
@@ -59,7 +59,10 @@ class PaymentDeeplinkPage extends StatelessWidget {
               children: [
                 IconButton(
                   icon: const Icon(Icons.close_rounded, color: Colors.white),
-                  onPressed: () => _cancel(context, payload),
+                  onPressed: () {
+                    _sendCancelCallback(payload);
+                    AppRouter.router.go('/home');
+                  },
                 ),
                 const Expanded(
                   child: Text('Konfirmasi Pembayaran',
