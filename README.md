@@ -61,6 +61,79 @@ Layer visual yang berinteraksi langsung dengan pengguna:
 
 ---
 
+## 📂 Struktur Folder Proyek
+
+### 1. Aplikasi Wallet Ku (Clean Architecture)
+Aplikasi dompet digital ini terstruktur dengan memisahkan domain bisnis, data, dan presentasi secara modular:
+```text
+wallet_ku/
+├── lib/
+│   ├── core/                      # Utilitas global dan konfigurasi aplikasi
+│   │   ├── constants/             # Konstanta teks, ukuran, dan API
+│   │   ├── router/                # Konfigurasi navigasi (GoRouter)
+│   │   ├── services/              # Layanan callback deeplink & otentikasi lokal
+│   │   │   ├── biometric_service.dart
+│   │   │   └── deeplink_service.dart
+│   │   └── theme/                 # Palet warna premium, tema, dan gaya teks
+│   │
+│   ├── data/                      # Implementasi operasional data (API/DB)
+│   │   ├── datasources/           # Remote client (Dio) & local storage (Secure Storage)
+│   │   ├── models/                # JSON parser & mapper untuk entitas
+│   │   └── repositories/          # Implementasi kontrak repositori domain
+│   │
+│   ├── domain/                    # Layer bisnis murni (bebas dependensi UI)
+│   │   ├── entities/              # Objek bisnis inti (User, Account, Transaction)
+│   │   ├── repositories/          # Kontrak interface data (abstraksi)
+│   │   └── usecases/              # Logika use-case spesifik aplikasi
+│   │
+│   ├── presentation/              # Layer visual antarmuka pengguna
+│   │   ├── blocs/                 # Pengelola state aplikasi menggunakan BLoC
+│   │   ├── pages/                 # Halaman aplikasi (home, payment, topup, transfer, success)
+│   │   └── widgets/               # Komponen UI reusable (buttons, badges, pin_pad)
+│   │
+│   ├── injection/                 # Pengaturan Dependency Injection (GetIt/Locator)
+│   ├── firebase_options.dart      # Konfigurasi Firebase untuk Android/iOS
+│   └── main.dart                  # Titik entri utama aplikasi
+```
+
+### 2. Aplikasi Material Ku (Feature-First Architecture)
+Aplikasi e-commerce ini dikelompokkan berdasarkan modul/fitur untuk mempermudah pengembangan modul:
+```text
+matrial_1123150086_uts/
+├── lib/
+│   ├── core/                      # Infrastruktur bersama & fungsi global
+│   │   ├── constants/             # String konstan & parameter endpoint
+│   │   ├── guards/                # Pelindung rute login / otentikasi (AuthGuard)
+│   │   ├── routes/                # Tabel rute navigasi aplikasi
+│   │   ├── services/              # Layanan backend HTTP, secure storage, & notifikasi
+│   │   │   ├── biometric_service.dart
+│   │   │   ├── dio_client.dart
+│   │   │   └── notification_service.dart
+│   │   ├── shared/                # Widget reusable lintas modul (buttons, fields, headers)
+│   │   └── theme/                 # Pengaturan tema visual & warna
+│   │
+│   ├── features/                  # Modul fitur utama e-commerce
+│   │   ├── auth/                  # Modul Otentikasi (Login, Register, Email Verification)
+│   │   │   ├── presentation/
+│   │   │   │   ├── pages/         # Tampilan halaman login, register, dll.
+│   │   │   │   └── providers/     # Pengelola state otentikasi (AuthProvider)
+│   │   │
+│   │   ├── cart/                  # Modul Keranjang & Transaksi Checkout
+│   │   │   ├── presentation/
+│   │   │   │   ├── pages/         # Tampilan cart, checkout, success, awaiting_payment
+│   │   │   │   └── providers/     # Pengelola state belanja & pembayaran
+│   │   │
+│   │   └── dashboard/             # Modul Dashboard utama (Home, History, Profile)
+│   │       ├── presentation/
+│   │       │   ├── pages/         # Tampilan dashboard, katalog produk, riwayat belanja
+│   │       │   └── providers/     # Pengelola katalog produk
+│   │
+│   ├── firebase_options.dart      # Konfigurasi Firebase lokal
+│   └── main.dart                  # Inisialisasi dependensi global & stream listener deeplink
+```
+
+---
+
 ## 🔄 Alur Integrasi Aplikasi (Application Flow)
 
 Integrasi komunikasi antar-aplikasi (**Material Ku** ⇆ **Wallet Ku**) berjalan menggunakan skema **Android Custom Intents (Deeplinks)**:
