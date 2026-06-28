@@ -1,17 +1,9 @@
-# wallet_ku
+# Aplikasi Wallet ku & Material ku
 
-A new Flutter project.
+ * Nama : Felan Ardenta Yoga Adiyama
+ * Nim : 1123150086
+ * Kelas : TI SE SH 23
+ * Matkul : Pemerograman Mobile Lanjuta
 
-## Getting Started
+ Aplikasi ini di buat bertujuan untuk memenuhi kebutuhan penilaian UAS Pemerograman Mobile Lanjuta pada semster 6 di Global Institute Bina Sarana Global.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
