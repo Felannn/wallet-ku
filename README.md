@@ -1,6 +1,6 @@
 # Aplikasi Wallet Ku & Material Ku (Integrasi E-Commerce & E-Wallet)
 
-* **Nama** : Felan Ardenta Yoga Adiyama
+* **Nama** : Felan Ardenta Yoga Adiyatama
 * **NIM** : 1123150086
 * **Kelas** : TI SE SH 23
 * **Matkul** : Pemrograman Mobile Lanjutan
